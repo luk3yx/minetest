@@ -3,7 +3,7 @@ core.log("info", "Initializing Asynchronous environment")
 
 function core.job_processor(serialized_func, serialized_param)
 	local func = loadstring(serialized_func)
-	local param = core.deserialize(serialized_param)
+	local param = core.deserialize(serialized_param, false)
 	local retval = nil
 
 	if type(func) == "function" then
@@ -14,4 +14,3 @@ function core.job_processor(serialized_func, serialized_param)
 
 	return retval or core.serialize(nil)
 end
-
