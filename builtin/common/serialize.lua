@@ -195,7 +195,7 @@ function core.deserialize(str, safe)
 	end
 	local f, err = loadstring(str)
 	if not f then return nil, err end
-	setfenv(f, safe and safe_env or env)
+	setfenv(f, (safe or safe == nil) and safe_env or env)
 
 	local good, data = pcall(f)
 	if good then
@@ -218,4 +218,3 @@ test_in = {escape_chars="\n\r\t\v\\\"\'", non_european="θשׁ٩∂"}
 test_out = core.deserialize(core.serialize(test_in))
 assert(test_in.escape_chars == test_out.escape_chars)
 assert(test_in.non_european == test_out.non_european)
-
